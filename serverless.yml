@@ -1,14 +1,12 @@
 service: bitbucket-code-pipeline-integration
 
-variablesResolutionMode: 20210326
 configValidationMode: error
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x
   stage: ${opt:stage, 'default'}
-  region: us-east-1
-  lambdaHashingVersion: 20201221
+  region: us-west-2
   iam:
     role:
       statements:

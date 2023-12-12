@@ -1,10 +1,10 @@
-import {APIGatewayProxyEventV2, APIGatewayProxyResultV2} from 'aws-lambda';
-import {S3} from 'aws-sdk';
 import {spawn} from 'child_process';
 import {createHmac, randomUUID} from 'crypto';
 import {promises as fs} from 'fs';
 import 'source-map-support/register';
 import {Readable} from 'stream';
+import {APIGatewayProxyEventV2, APIGatewayProxyResultV2} from 'aws-lambda';
+import {S3} from 'aws-sdk';
 import {getConfig} from './config';
 
 const s3 = new S3();
@@ -100,7 +100,7 @@ const archiveBranch = async (
         {
             env: {
                 ...process.env,
-                'GIT_SSH_COMMAND': `ssh -i ${sshKeyFilename} -o UserKnownHostsFile=${knownHostsFilename}`,
+                'GIT_SSH_COMMAND': `ssh -o IdentityFile=${sshKeyFilename} -o BatchMode=Yes -o UserKnownHostsFile=${knownHostsFilename}`,
             },
         },
     );
